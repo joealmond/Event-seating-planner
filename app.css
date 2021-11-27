@@ -1,0 +1,39 @@
+body {
+  display: grid;
+  /* box-sizing: border-box;
+  overflow: hidden; */
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  grid-template-columns: [col] 6rem [col] repeat(12, 0.1rem [gap] auto [col]) 1rem [end];
+  grid-template-rows: [row] 6rem [row] repeat(12, 0.1rem [gap] auto [row]) 1rem [last];
+}
+.logoNav {
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+  background-color: whitesmoke;
+}
+.topNav {
+  grid-column: 2 / span 25;
+  grid-row: 1 / 1;
+  background-color: whitesmoke;
+}
+.sideNav {
+  grid-column: 1 / 1;
+  grid-row: 2 / span 25;
+  background-color: whitesmoke;
+}
+.footer {
+  grid-column: 2 / span 25;
+  grid-row: 26 / 26;
+  background-color: whitesmoke;
+}
+.svgWindow {
+  grid-column: 3 / span 24;
+  grid-row: 3 / 24;
+}
+
+.item-c {
+  grid-column: 3 / span 2;
+  grid-row: third-line / 4;
+}
