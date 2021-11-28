@@ -1,11 +1,13 @@
+// Global Variables:
+
 let diameter = 180;
 let cr = diameter / 2;
-let cx = 90;
-let cy = 90;
+let cx = diameter / 2;
+let cy = diameter / 2;
 let rx = 0;
 let ry = 0;
-let rw = 40;
-let rh = 40;
+let rw = 30;
+let rh = 30;
 let tx = 0;
 let ty = 0;
 let seats = 12;
@@ -13,6 +15,8 @@ let gap = 100;
 let roundSeatGap = 30;
 let roundSeatGapCorrected = roundSeatGap + rh / 2;
 let gapCorrected = diameter + gap + roundSeatGap + rh + rh / 2;
+
+// Draw Functions:
 
 function drawClear() {
   let clear = ``;
@@ -29,13 +33,13 @@ function drawCircle(cx, cy, cr) {
 function drawRectangle(rx, ry, rw, rh, tx, ty, angle) {
   let rect = `<rect x="${roundSeatGap + rx - rw / 2}" y="${
     ry - rh / 2
-  }" width="${rw}" height="${rh}" transform="translate(${tx},${ty}) rotate(${angle})"/>`;
+  }" width="${rw}" height="${rh}" transform="translate(${tx}, ${ty}) rotate(${angle})"/>`;
   document
     .getElementsByClassName("svgWindow")[0]
     .insertAdjacentHTML("beforeend", rect);
 }
 
-function render() {
+function renderRoundTables() {
   for (let i = 0; i < 12; i++) {
     for (let k = 0; k < 6; k++) {
       drawCircle(i * gapCorrected + cx, k * gapCorrected + cy, cr);
@@ -59,7 +63,21 @@ function render() {
     }
   }
 }
-render();
+
+// Event Handlers:
+
+// Mode Input:
+const modeInput = document.querySelector("#mode");
+
+modeInput.addEventListener("input", modeInputHandler);
+function modeInputHandler(e) {
+  e.preventDefault();
+  drawClear();
+  if (modeInput.options.selectedIndex === 0) renderRoundTables();
+  else if (modeInput.options.selectedIndex === 1) renderNoTables();
+}
+
+// Zoom:
 const zoom = document.querySelector("#zoom");
 zoom.defaultValue = 2000;
 const svgWindow =
@@ -71,17 +89,21 @@ function zoomHandler(e) {
   svgWindow.height = zoom.value;
   svgWindow.width = zoom.value * 2;
 }
-// viewBox="0 0 4000 2000"
 
+// User Input:
+const formInput = document.querySelector(".userInput");
 const diameterInput = document.querySelector("#diameter");
-// diameterInput.defaultValue = 180;
+diameterInput.defaultValue = 180;
 
-diameterInput.addEventListener("input", diameterHandler);
-function diameterHandler(e) {
+formInput.addEventListener("submit", formInputHandler);
+function formInputHandler(e) {
   e.preventDefault();
   drawClear();
-  diameter = diameterInput.value;
-  cr = diameter / 2;
-  gapCorrected = diameter + gap + roundSeatGap + rh + rh / 2;
+  diameter = parseInt(diameterInput.value);
   render();
 }
+
+// Main program:
+
+if (modeInput.options.selectedIndex === 0) renderRoundTables();
+else if (modeInput.options.selectedIndex === 1) renderNoTables();
