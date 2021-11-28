@@ -16,6 +16,29 @@ let roundSeatGap = 30;
 let roundSeatGapCorrected = roundSeatGap + rh / 2;
 let gapCorrected = diameter + gap + roundSeatGap + rh + rh / 2;
 
+// Global templates:
+
+const noTableMenuContent = `<label for="width">Széleség:</label>
+<input
+  type="number"
+  id="width"
+  name="width"
+  required
+  minlength="3"
+  maxlength="3"
+  size="10"
+/>`;
+const roundTableMenuContent = `<label for="diameter">Aszal átmérő:</label>
+<input
+  type="number"
+  id="diameter"
+  name="diameter"
+  required
+  minlength="3"
+  maxlength="3"
+  size="10"
+/>`;
+
 // Draw Functions:
 
 function drawClear() {
@@ -64,6 +87,18 @@ function renderRoundTables() {
   }
 }
 
+function renderNoTables() {
+  drawClear();
+}
+
+function renderSelectedMode() {
+  if (modeInput.options.selectedIndex === 0) {
+    if (formInput.innerHTML !== roundTableMenuContent) renderRoundTables();
+  } else if (modeInput.options.selectedIndex === 1) {
+    if (formInput.innerHTML !== noTableMenuContent) renderNoTables();
+  }
+}
+
 // Event Handlers:
 
 // Mode Input:
@@ -73,8 +108,7 @@ modeInput.addEventListener("input", modeInputHandler);
 function modeInputHandler(e) {
   e.preventDefault();
   drawClear();
-  if (modeInput.options.selectedIndex === 0) renderRoundTables();
-  else if (modeInput.options.selectedIndex === 1) renderNoTables();
+  renderSelectedMode();
 }
 
 // Zoom:
@@ -100,10 +134,13 @@ function formInputHandler(e) {
   e.preventDefault();
   drawClear();
   diameter = parseInt(diameterInput.value);
-  render();
+  cr = diameter / 2;
+  cx = diameter / 2;
+  cy = diameter / 2;
+  gapCorrected = diameter + gap + roundSeatGap + rh + rh / 2;
+  renderSelectedMode();
 }
 
 // Main program:
 
-if (modeInput.options.selectedIndex === 0) renderRoundTables();
-else if (modeInput.options.selectedIndex === 1) renderNoTables();
+renderSelectedMode();
