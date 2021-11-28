@@ -23,8 +23,28 @@
         <option value="noTable">Széksoros</option>
       </select>
     </form>
-    <form class="userInput" action="">
-      <label for="diameter">Aszal átmérő:</label>
+    <form id="userInput" action="">
+      <label for="hallWidth">Terem szélessége:</label>
+      <input
+        type="number"
+        id="hallWidth"
+        name="hallWidth"
+        required
+        minlength="2"
+        maxlength="5"
+        size="10"
+      />
+      <label for="hallLength">Terem hossza:</label>
+      <input
+        type="number"
+        id="hallLength"
+        name="hallLength"
+        required
+        minlength="2"
+        maxlength="5"
+        size="10"
+      />
+      <label for="diameter">Asztal átmérő:</label>
       <input
         type="number"
         id="diameter"
@@ -34,29 +54,98 @@
         maxlength="3"
         size="10"
       />
+      <label for="seatWidth">Szék szélesség:</label>
+      <input
+        type="number"
+        id="seatWidth"
+        name="seatWidth"
+        required
+        minlength="2"
+        maxlength="2"
+        size="10"
+      />
+      <label for="seatDepth">Szék mélyég:</label>
+      <input
+        type="number"
+        id="seatDepth"
+        name="seatDepth"
+        required
+        minlength="2"
+        maxlength="2"
+        size="10"
+      />
+      <label for="seatPerTable">Szék asztalonként:</label>
+      <input
+        type="number"
+        id="seatPerTable"
+        name="seatPerTable"
+        required
+        minlength="1"
+        maxlength="2"
+        size="10"
+      />
+      <label for="seatPos">Szék távolság:</label>
+      <input
+        type="number"
+        id="seatPos"
+        name="seatPos"
+        required
+        minlength="1"
+        maxlength="2"
+        size="10"
+      />
+      <label for="passway">Járás:</label>
+      <input
+        type="number"
+        id="passway"
+        name="passway"
+        required
+        minlength="1"
+        maxlength="2"
+        size="10"
+      />
+      <label for="oszlop">Oszlopok száma:</label>
+      <input
+        type="number"
+        id="oszlop"
+        name="oszlop"
+        required
+        minlength="1"
+        maxlength="3"
+        size="10"
+      />
+      <label for="sor">Sorok száma:</label>
+      <input
+        type="number"
+        id="sor"
+        name="sor"
+        required
+        minlength="1"
+        maxlength="3"
+        size="10"
+      />
+      <label for="horizontalPos">Vízszintes helyzet:</label>
+      <input
+        type="range"
+        id="horizontalPos"
+        name="horizontalPos"
+        required
+        min="1"
+        max="10000"
+        size="10"
+      />
+      <label for="verticalPos">Függőleges helyzet:</label>
+      <input
+        type="range"
+        id="verticalPos"
+        name="verticalPos"
+        required
+        min="1"
+        max="10000"
+        size="10"
+      />
+      <input type="submit" value="Küld" />
     </form>
-    <!-- <textarea name="textarea" rows="10" cols="10">
-Add meg a méreteket cm-ben, 
-mértékegység nélkül!
-
-Terem bruttó szélessége:
-1500
-Terem bruttó szélessége:
-2000
-Körasztal átmérő:
-180
-Szék mélység:
-40
-Szék szélesség:
-40
-Szék asztalonként:
-12
-Szék távolsága az asztaltól:
-40
-Járás:
-100
-      </textarea
-    > -->
     <div class="zoom">
       <input
         type="range"

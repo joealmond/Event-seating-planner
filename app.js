@@ -1,18 +1,28 @@
 // Global Variables:
 
+// User Selectable Variables:
 let diameter = 180;
+let rw = 45;
+let rh = 50;
+let seats = 12;
+let roundSeatGap = 30;
+let gap = 100;
+let oszlop = 2;
+let sor = 3;
+
+let hw = 2000;
+let hl = 1500;
+let hPos = 180;
+let VPos = 180;
+
+// Internal Variables:
 let cr = diameter / 2;
 let cx = diameter / 2;
 let cy = diameter / 2;
 let rx = 0;
 let ry = 0;
-let rw = 30;
-let rh = 30;
 let tx = 0;
 let ty = 0;
-let seats = 12;
-let gap = 100;
-let roundSeatGap = 30;
 let roundSeatGapCorrected = roundSeatGap + rh / 2;
 let gapCorrected = diameter + gap + roundSeatGap + rh + rh / 2;
 
@@ -28,7 +38,28 @@ const noTableMenuContent = `<label for="width">Széleség:</label>
   maxlength="3"
   size="10"
 />`;
-const roundTableMenuContent = `<label for="diameter">Aszal átmérő:</label>
+const roundTableMenuContent = `
+<label for="hallWidth">Terem szélessége:</label>
+<input
+  type="number"
+  id="hallWidth"
+  name="hallWidth"
+  required
+  minlength="2"
+  maxlength="5"
+  size="10"
+/>
+<label for="hallLength">Terem hossza:</label>
+<input
+  type="number"
+  id="hallLength"
+  name="hallLength"
+  required
+  minlength="2"
+  maxlength="5"
+  size="10"
+/>
+<label for="diameter">Asztal átmérő:</label>
 <input
   type="number"
   id="diameter"
@@ -37,7 +68,99 @@ const roundTableMenuContent = `<label for="diameter">Aszal átmérő:</label>
   minlength="3"
   maxlength="3"
   size="10"
-/>`;
+/>
+<label for="seatWidth">Szék szélesség:</label>
+<input
+  type="number"
+  id="seatWidth"
+  name="seatWidth"
+  required
+  minlength="2"
+  maxlength="2"
+  size="10"
+/>
+<label for="seatDepth">Szék mélyég:</label>
+<input
+  type="number"
+  id="seatDepth"
+  name="seatDepth"
+  required
+  minlength="2"
+  maxlength="2"
+  size="10"
+/>
+<label for="seatPerTable">Szék asztalonként:</label>
+<input
+  type="number"
+  id="seatPerTable"
+  name="seatPerTable"
+  required
+  minlength="1"
+  maxlength="2"
+  size="10"
+/>
+<label for="seatPos">Szék távolság:</label>
+<input
+  type="number"
+  id="seatPos"
+  name="seatPos"
+  required
+  minlength="1"
+  maxlength="2"
+  size="10"
+/>
+<label for="passway">Járás:</label>
+<input
+  type="number"
+  id="passway"
+  name="passway"
+  required
+  minlength="1"
+  maxlength="2"
+  size="10"
+/>
+<label for="oszlop">Oszlopok száma:</label>
+<input
+  type="number"
+  id="oszlop"
+  name="oszlop"
+  required
+  minlength="1"
+  maxlength="3"
+  size="10"
+/>
+<label for="sor">Sorok száma:</label>
+<input
+  type="number"
+  id="sor"
+  name="sor"
+  required
+  minlength="1"
+  maxlength="3"
+  size="10"
+/>
+<label for="horizontalPos">Vízszintes helyzet:</label>
+<input
+  type="range"
+  id="horizontalPos"
+  name="horizontalPos"
+  required
+  min="1"
+  max="10000"
+  size="10"
+/>
+<label for="verticalPos">Függőleges helyzet:</label>
+<input
+  type="range"
+  id="verticalPos"
+  name="verticalPos"
+  required
+  min="1"
+  max="10000"
+  size="10"
+/>
+<input type="submit" value="Küld" />
+`;
 
 // Draw Functions:
 
@@ -63,8 +186,8 @@ function drawRectangle(rx, ry, rw, rh, tx, ty, angle) {
 }
 
 function renderRoundTables() {
-  for (let i = 0; i < 12; i++) {
-    for (let k = 0; k < 6; k++) {
+  for (let i = 0; i < sor; i++) {
+    for (let k = 0; k < oszlop; k++) {
       drawCircle(i * gapCorrected + cx, k * gapCorrected + cy, cr);
       let angle = 0;
       rx = cx;
@@ -125,15 +248,51 @@ function zoomHandler(e) {
 }
 
 // User Input:
-const formInput = document.querySelector(".userInput");
+const formInput = document.querySelector("#userInput");
+
+const hallWidthInput = document.querySelector("#hallWidth");
+hallWidthInput.defaultValue = 20000;
+const hallLengthInput = document.querySelector("#hallLength");
+hallLengthInput.defaultValue = 15000;
 const diameterInput = document.querySelector("#diameter");
 diameterInput.defaultValue = 180;
+const seatWidthInput = document.querySelector("#seatWidth");
+seatWidthInput.defaultValue = 45;
+const seatDepthInput = document.querySelector("#seatDepth");
+seatDepthInput.defaultValue = 50;
+const seatPerTableInput = document.querySelector("#seatPerTable");
+seatPerTableInput.defaultValue = 12;
+const seatPosInput = document.querySelector("#seatPos");
+seatPosInput.defaultValue = 30;
+const passwayInput = document.querySelector("#passway");
+passwayInput.defaultValue = 100;
+const oszlopInput = document.querySelector("#oszlop");
+oszlopInput.defaultValue = 2;
+const sorInput = document.querySelector("#sor");
+sorInput.defaultValue = 3;
+const horizontalPosInput = document.querySelector("#horizontalPos");
+horizontalPosInput.defaultValue = 180;
+const verticalPosInput = document.querySelector("#verticalPos");
+verticalPosInput.defaultValue = 180;
 
 formInput.addEventListener("submit", formInputHandler);
 function formInputHandler(e) {
   e.preventDefault();
+  console.log("fire");
   drawClear();
+  hw = parseInt(hallWidthInput.value);
+  hl = parseInt(hallLengthInput.value);
   diameter = parseInt(diameterInput.value);
+  rw = parseInt(seatWidthInput.value);
+  rh = parseInt(seatDepthInput.value);
+  seats = parseInt(seatPerTableInput.value);
+  roundSeatGap = parseInt(seatPosInput.value);
+  gap = parseInt(passwayInput.value);
+  oszlop = parseInt(oszlopInput.value);
+  sor = parseInt(sorInput.value);
+  // hPos = parseInt(horizontalPosInput.value);
+  // vPos = parseInt(verticalPosInput.value);
+
   cr = diameter / 2;
   cx = diameter / 2;
   cy = diameter / 2;
