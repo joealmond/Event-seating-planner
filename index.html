@@ -16,10 +16,56 @@
     <nav class="logoNav"></nav>
     <nav class="topNav"></nav>
     <nav class="sideNav"></nav>
+    <form class="userInput" action="">
+      <label for="diameter">Aszal átmérő:</label>
+      <input
+        type="number"
+        id="diameter"
+        name="diameter"
+        required
+        minlength="3"
+        maxlength="3"
+        size="10"
+      />
+    </form>
+    <!-- <textarea name="textarea" rows="10" cols="10">
+Add meg a méreteket cm-ben, 
+mértékegység nélkül!
+
+Terem bruttó szélessége:
+1500
+Terem bruttó szélessége:
+2000
+Körasztal átmérő:
+180
+Szék mélység:
+40
+Szék szélesség:
+40
+Szék asztalonként:
+12
+Szék távolsága az asztaltól:
+40
+Járás:
+100
+      </textarea
+    > -->
+    <div class="zoom">
+      <input
+        type="range"
+        id="zoom"
+        name="zoom"
+        min="100"
+        max="20000"
+        defaultValue=""
+      />
+      <label for="zoom">Zoom</label>
+    </div>
     <svg
       class="svgWindow"
       width="100%"
       height="100%"
+      viewBox="0 0 4000 2000"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:svg="http://www.w3.org/2000/svg"
