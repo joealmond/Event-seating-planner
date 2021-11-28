@@ -126,22 +126,22 @@
       />
       <label for="horizontalPos">Vízszintes helyzet:</label>
       <input
-        type="range"
+        type="number"
         id="horizontalPos"
         name="horizontalPos"
         required
-        min="1"
-        max="10000"
+        minlength="1"
+        maxlength="4"
         size="10"
       />
       <label for="verticalPos">Függőleges helyzet:</label>
       <input
-        type="range"
+        type="number"
         id="verticalPos"
         name="verticalPos"
         required
-        min="1"
-        max="10000"
+        minlength="1"
+        maxlength="4"
         size="10"
       />
       <input type="submit" value="Küld" />
@@ -151,7 +151,7 @@
         type="range"
         id="zoom"
         name="zoom"
-        min="100"
+        min="200"
         max="20000"
         defaultValue=""
       />

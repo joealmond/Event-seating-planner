@@ -13,9 +13,10 @@ let sor = 3;
 let hw = 2000;
 let hl = 1500;
 let hPos = 180;
-let VPos = 180;
+let vPos = 180;
 
 // Internal Variables:
+let scale = 2000; // Svg Viewbox parameter
 let cr = diameter / 2;
 let cx = diameter / 2;
 let cy = diameter / 2;
@@ -188,7 +189,11 @@ function drawRectangle(rx, ry, rw, rh, tx, ty, angle) {
 function renderRoundTables() {
   for (let i = 0; i < sor; i++) {
     for (let k = 0; k < oszlop; k++) {
-      drawCircle(i * gapCorrected + cx, k * gapCorrected + cy, cr);
+      drawCircle(
+        hPos + i * gapCorrected + cx,
+        vPos + k * gapCorrected + cy,
+        cr
+      );
       let angle = 0;
       rx = cx;
       ry = cy;
@@ -200,8 +205,8 @@ function renderRoundTables() {
           ry,
           rw,
           rh,
-          i * gapCorrected + tx,
-          k * gapCorrected + ty,
+          hPos + i * gapCorrected + tx,
+          vPos + k * gapCorrected + ty,
           angle
         );
         angle += 360 / seats;
@@ -247,6 +252,16 @@ function zoomHandler(e) {
   svgWindow.width = zoom.value * 2;
 }
 
+// Zoom on mouse Wheel:
+const svgWindowAll = document.querySelector(".svgWindow");
+svgWindowAll.addEventListener("wheel", zoomWheelHandler);
+function zoomWheelHandler(e) {
+  e.preventDefault();
+  scale += e.deltaY;
+  svgWindow.height = scale;
+  svgWindow.width = scale * 2;
+}
+
 // User Input:
 const formInput = document.querySelector("#userInput");
 
@@ -290,8 +305,8 @@ function formInputHandler(e) {
   gap = parseInt(passwayInput.value);
   oszlop = parseInt(oszlopInput.value);
   sor = parseInt(sorInput.value);
-  // hPos = parseInt(horizontalPosInput.value);
-  // vPos = parseInt(verticalPosInput.value);
+  hPos = parseInt(horizontalPosInput.value);
+  vPos = parseInt(verticalPosInput.value);
 
   cr = diameter / 2;
   cx = diameter / 2;
