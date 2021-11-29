@@ -7,8 +7,10 @@ let rh = 50;
 let seats = 12;
 let roundSeatGap = 30;
 let gap = 100;
-let oszlop = 2;
-let sor = 3;
+let oszlop = 5;
+let sor = 10;
+let rxGap = 50;
+let ryGap = 10;
 
 let hw = 2000;
 let hl = 1500;
@@ -471,7 +473,7 @@ function drawCircle(cx, cy, cr) {
     .insertAdjacentHTML("beforeend", circle);
 }
 
-function drawRectangle(rx, ry, rw, rh, tx, ty, angle) {
+function drawRectangle(rx, ry, rw, rh, tx = 0, ty = 0, angle = 0) {
   let rect = `<rect x="${roundSeatGap + rx - rw / 2}" y="${
     ry - rh / 2
   }" width="${rw}" height="${rh}" transform="translate(${tx}, ${ty}) rotate(${angle})"/>`;
@@ -512,6 +514,23 @@ function renderRoundTables() {
 
 function renderNoTables() {
   drawClear();
+  for (let i = 0; i < sor; i++) {
+    for (let k = 0; k < oszlop; k++) {
+      drawRectangle(
+        hPos + i * rx * ((rxGap + rw) / 100),
+        vPos + k * ry * ((ryGap + rh) / 100),
+        rw,
+        rh
+        // hPos + i * gapCorrected + tx,
+        // vPos + k * gapCorrected + ty
+      );
+      // drawCircle(
+      //   hPos + i * gapCorrected + cx,
+      //   vPos + k * gapCorrected + cy,
+      //   cr
+      // );
+    }
+  }
 }
 
 // Mode Input:
