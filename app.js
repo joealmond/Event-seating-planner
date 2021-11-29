@@ -9,8 +9,8 @@ let roundSeatGap = 30;
 let gap = 100;
 let oszlop = 5;
 let sor = 10;
-let rxGap = 50;
-let ryGap = 10;
+let rxGap = gap;
+let ryGap = roundSeatGap;
 
 let hw = 2000;
 let hl = 1500;
@@ -29,146 +29,11 @@ let ty = 0;
 let roundSeatGapCorrected = roundSeatGap + rh / 2;
 let gapCorrected = diameter + gap + roundSeatGap + rh + rh / 2;
 
-// Global templates:
-
-const noTableMenuContent = `<label for="width">Széleség:</label>
-<input
-  type="number"
-  id="width"
-  name="width"
-  required
-  minlength="3"
-  maxlength="3"
-  size="10"
-/>`;
-const roundTableMenuContent = `
-<label for="hallWidth">Terem szélessége:</label>
-<input
-  type="number"
-  id="hallWidth"
-  name="hallWidth"
-  required
-  minlength="2"
-  maxlength="5"
-  size="10"
-/>
-<label for="hallLength">Terem hossza:</label>
-<input
-  type="number"
-  id="hallLength"
-  name="hallLength"
-  required
-  minlength="2"
-  maxlength="5"
-  size="10"
-/>
-<label for="diameter">Asztal átmérő:</label>
-<input
-  type="number"
-  id="diameter"
-  name="diameter"
-  required
-  minlength="3"
-  maxlength="3"
-  size="10"
-/>
-<label for="seatWidth">Szék szélesség:</label>
-<input
-  type="number"
-  id="seatWidth"
-  name="seatWidth"
-  required
-  minlength="2"
-  maxlength="2"
-  size="10"
-/>
-<label for="seatDepth">Szék mélyég:</label>
-<input
-  type="number"
-  id="seatDepth"
-  name="seatDepth"
-  required
-  minlength="2"
-  maxlength="2"
-  size="10"
-/>
-<label for="seatPerTable">Szék asztalonként:</label>
-<input
-  type="number"
-  id="seatPerTable"
-  name="seatPerTable"
-  required
-  minlength="1"
-  maxlength="2"
-  size="10"
-/>
-<label for="seatPos">Szék távolság:</label>
-<input
-  type="number"
-  id="seatPos"
-  name="seatPos"
-  required
-  minlength="1"
-  maxlength="2"
-  size="10"
-/>
-<label for="passway">Járás:</label>
-<input
-  type="number"
-  id="passway"
-  name="passway"
-  required
-  minlength="1"
-  maxlength="2"
-  size="10"
-/>
-<label for="oszlop">Oszlopok száma:</label>
-<input
-  type="number"
-  id="oszlop"
-  name="oszlop"
-  required
-  minlength="1"
-  maxlength="3"
-  size="10"
-/>
-<label for="sor">Sorok száma:</label>
-<input
-  type="number"
-  id="sor"
-  name="sor"
-  required
-  minlength="1"
-  maxlength="3"
-  size="10"
-/>
-<label for="horizontalPos">Vízszintes helyzet:</label>
-<input
-  type="number"
-  id="horizontalPos"
-  name="horizontalPos"
-  required
-  minlength="1"
-  maxlength="4"
-  size="10"
-/>
-<label for="verticalPos">Függőleges helyzet:</label>
-<input
-  type="number"
-  id="verticalPos"
-  name="verticalPos"
-  required
-  minlength="1"
-  maxlength="4"
-  size="10"
-/>
-<input type="submit" value="Küld" />
-`;
-
 // Menu Functions:
 
 // User Input:
 const formInput = document.querySelector("#userInput");
+const formInputNoTable = document.querySelector("#userInputNoTable");
 const formSubmitInput = document.querySelector("#submit");
 const hallWidthInput = document.querySelector("#hallWidth");
 // hallWidthInput.defaultValue = 20000;
@@ -282,7 +147,7 @@ const seatPerTableNode = Object.assign(document.createElement("input"), {
 });
 const seatPosLabel = Object.assign(document.createElement("label"), {
   for: "seatPos",
-  textContent: "Szék távolság:",
+  textContent: "Szék illesztés:",
 });
 const seatPosNode = Object.assign(document.createElement("input"), {
   type: "number",
@@ -296,7 +161,7 @@ const seatPosNode = Object.assign(document.createElement("input"), {
 });
 const passwayLabel = Object.assign(document.createElement("label"), {
   for: "passway",
-  textContent: "Járás:",
+  textContent: "Járás/szék távolság:",
 });
 const passwayNode = Object.assign(document.createElement("input"), {
   type: "number",
@@ -364,9 +229,15 @@ const verticalPosNode = Object.assign(document.createElement("input"), {
   value: "180",
   size: "10",
 });
+const submitNode = Object.assign(document.createElement("input"), {
+  type: "submit",
+  id: "submit",
+  value: "Küld",
+});
 
 function renderRountableMenu() {
   clearMenu();
+  formInput.appendChild(submitNode);
   formInput.appendChild(hallWidthLabel);
   formInput.appendChild(hallWidthNode);
   formInput.appendChild(hallLengthLabel);
@@ -395,7 +266,27 @@ function renderRountableMenu() {
 
 function renderNoTableMenu() {
   clearMenu();
-  userInput.insertAdjacentHTML("beforeend", noTableMenuContent);
+  formInputNoTable.appendChild(submitNode);
+  formInputNoTable.appendChild(hallWidthLabel);
+  formInputNoTable.appendChild(hallWidthNode);
+  formInputNoTable.appendChild(hallLengthLabel);
+  formInputNoTable.appendChild(hallLengthNode);
+  formInputNoTable.appendChild(seatWidthLabel);
+  formInputNoTable.appendChild(seatWidthNode);
+  formInputNoTable.appendChild(seatDepthLabel);
+  formInputNoTable.appendChild(seatDepthNode);
+  formInputNoTable.appendChild(seatPosLabel);
+  formInputNoTable.appendChild(seatPosNode);
+  formInputNoTable.appendChild(passwayLabel);
+  formInputNoTable.appendChild(passwayNode);
+  formInputNoTable.appendChild(oszlopLabel);
+  formInputNoTable.appendChild(oszlopNode);
+  formInputNoTable.appendChild(sorLabel);
+  formInputNoTable.appendChild(sorNode);
+  formInputNoTable.appendChild(horizontalPosLabel);
+  formInputNoTable.appendChild(horizontalPosNode);
+  formInputNoTable.appendChild(verticalPosLabel);
+  formInputNoTable.appendChild(verticalPosNode);
 }
 
 // Event Handlers:
@@ -447,16 +338,28 @@ function formInputHandler(e) {
   renderRountableMenu();
 }
 
+formInputNoTable.addEventListener("submit", formInputNoTableHandler);
+function formInputNoTableHandler(e) {
+  e.preventDefault();
+  hw = parseInt(e.target.hallWidth.value);
+  hl = parseInt(e.target.hallLength.value);
+
+  rw = parseInt(e.target.seatWidth.value);
+  rh = parseInt(e.target.seatDepth.value);
+
+  rygap = parseInt(e.target.seatPos.value);
+  rxGap = parseInt(e.target.passway.value);
+
+  oszlop = parseInt(e.target.oszlop.value);
+  sor = parseInt(e.target.sor.value);
+
+  renderNoTables();
+  renderNoTables();
+}
+
 function clearMenu() {
   const formInput = document.querySelector("#userInput");
   formInput.textContent = "";
-
-  const submitNode = Object.assign(document.createElement("input"), {
-    type: "submit",
-    id: "submit",
-    value: "Küld",
-  });
-  formInput.appendChild(submitNode);
 }
 
 // Draw Functions:
