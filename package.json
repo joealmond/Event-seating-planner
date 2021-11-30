@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "bower": "^1.8.13",
+    "file-saver": "^2.0.5"
+  },
+  "name": "seating-planner",
+  "description": "",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joealmond/seating-planner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joealmond/seating-planner/issues"
+  },
+  "homepage": "https://github.com/joealmond/seating-planner#readme"
+}

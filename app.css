@@ -31,12 +31,12 @@ body {
 }
 .svgWindow {
   grid-column: 3 / span 24;
-  grid-row: 1 / span 26;
+  grid-row: 1 / span 23;
 }
 
 .zoom {
   grid-column: 1;
-  grid-row: 23;
+  grid-row: 24;
 }
 
 .modeInput {
@@ -47,12 +47,17 @@ body {
   margin-left: 0.2rem;
   width: 8rem;
 }
-
-#userInput {
+.formShared {
   grid-column: 1;
   grid-row: 5;
 }
+
 #userInput > * {
+  margin-left: 0.2rem;
+  width: 8rem;
+}
+
+#userInputNoTable > * {
   margin-left: 0.2rem;
   width: 8rem;
 }
@@ -60,11 +65,11 @@ input[type="submit"] {
   margin-top: 1rem;
 }
 
-#userInputNoTable {
+.saveFile {
   grid-column: 1;
-  grid-row: 5;
+  grid-row: 21;
 }
-#userInputNoTable > * {
+.saveFile > * {
   margin-left: 0.2rem;
   width: 8rem;
 }

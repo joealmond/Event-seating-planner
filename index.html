@@ -23,9 +23,11 @@
         <option value="noTable">Széksoros</option>
       </select>
     </form>
-    <form id="userInput" action=""></form>
-  </form>
-  <form id="userInputNoTable" action=""></form>
+    <div class="formShared">
+      <form id="userInput" action=""></form>
+      <form id="userInputNoTable" action=""></form>
+    </div>
+    <div class="saveFile"></div>
     <div class="zoom">
       <input
         type="range"
@@ -35,6 +37,7 @@
         max="20000"
         defaultValue=""
       />
+
       <label for="zoom">Zoom</label>
     </div>
     <svg
@@ -48,6 +51,8 @@
     ></svg>
     <footer class="footer"></footer>
 
-    <script src="app.js" async defer></script>
+    <!-- <script src="app.js" async defer></script> -->
+    <!-- <script type="module" src="./node_modules/file-saver/dist/FileSaver.min.js"></script> -->
+    <script type="module" src="app.js"></script>
   </body>
 </html>
