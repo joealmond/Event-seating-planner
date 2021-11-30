@@ -271,9 +271,9 @@ const seatPosInput = document.querySelector("#seatPos");
 const passwayInput = document.querySelector("#passway");
 // passwayInput.defaultValue = 100;
 const oszlopInput = document.querySelector("#oszlop");
-// oszlopInput.defaultValue = 2;
+// oszlopInput.defaultValue = 5;
 const sorInput = document.querySelector("#sor");
-// sorInput.defaultValue = 3;
+// sorInput.defaultValue = 6;
 const horizontalPosInput = document.querySelector("#horizontalPos");
 // horizontalPosInput.defaultValue = 180;
 const verticalPosInput = document.querySelector("#verticalPos");
@@ -405,7 +405,7 @@ const oszlopNode = Object.assign(document.createElement("input"), {
   required: "",
   minlength: "1",
   maxlength: "3",
-  value: "2",
+  value: "5",
   size: "10",
 });
 const sorLabel = Object.assign(document.createElement("label"), {
@@ -419,7 +419,7 @@ const sorNode = Object.assign(document.createElement("input"), {
   required: "",
   minlength: "1",
   maxlength: "3",
-  value: "3",
+  value: "6",
   size: "10",
 });
 const horizontalPosLabel = Object.assign(document.createElement("label"), {
@@ -659,7 +659,7 @@ function drawCircle(
   cy,
   cr,
   fill = "none",
-  stroke = "black",
+  stroke = "DarkSlateGray",
   strokeWidth = "2"
 ) {
   let circle = `<circle cx="${cx}" cy="${cy}" r="${cr}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}"/>`;
@@ -677,7 +677,7 @@ function drawRectangle(
   ty = 0,
   angle = 0,
   fill = "none",
-  stroke = "black",
+  stroke = "DarkSlateGray",
   strokeWidth = "2"
 ) {
   let rect = `<rect x="${roundSeatGap + rx - rw / 2}" y="${
