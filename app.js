@@ -467,7 +467,29 @@ const userInputNoTable = Object.assign(document.createElement("form"), {
 });
 
 function renderRountableMenu() {
+  console.log("render table");
   clearMenu();
+  // Mode Input:
+  const modeInput = document.querySelector("#mode");
+
+  modeInput.addEventListener("input", modeInputHandler);
+  function modeInputHandler(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    modeInput.removeEventListener("input", modeInputHandler);
+    if (e.target.value === "roundTale") {
+      renderRountableMenu();
+      renderRoundTables();
+    }
+    if (e.target.value === "noTable") {
+      renderNoTableMenu();
+      renderNoTables();
+    }
+  }
+
+  // Tale Variables:
+  let mode = modeInput.options.selectedIndex;
+
   // formInputNoTable.remove();
   formSharedInput.appendChild(userInput);
   formInput.appendChild(submitNode);
@@ -500,6 +522,9 @@ function renderRountableMenu() {
   formInput.addEventListener("submit", formInputHandler);
   function formInputHandler(e) {
     e.preventDefault();
+    e.stopPropagation();
+    submitNode.removeEventListener("submit", formInputHandler);
+    console.log("RoundTable submit:", e);
     hw = parseInt(e.target.hallWidth.value);
     hl = parseInt(e.target.hallLength.value);
     diameter = parseInt(e.target.diameter.value);
@@ -518,35 +543,34 @@ function renderRountableMenu() {
     cy = diameter / 2;
     gapCorrected = diameter + gap + roundSeatGap + rh + rh / 2;
     renderRoundTables();
-    renderRountableMenu();
-  }
-
-  // File Saver:
-  saveFile.addEventListener("click", saveFileInputHandler);
-  function saveFileInputHandler(e) {
-    e.preventDefault();
-    const svgWindow = document.getElementsByClassName("svgWindow")[0].innerHTML;
-    const svgContent =
-      `<svg
-    class="svgWindow"
-    width="100%"
-    height="100%"
-    viewBox="0 0 4000 2000"
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:svg="http://www.w3.org/2000/svg"
-  >` +
-      svgWindow +
-      `</svg>`;
-    const blob = new Blob([svgContent], {
-      type: "text/plain;charset=utf-8",
-    });
-    saveAs(blob, "notfinal.svg");
+    // renderRountableMenu();
   }
 }
 
 function renderNoTableMenu() {
+  console.log("render notable");
   clearMenu();
+  // Mode Input:
+  const modeInput = document.querySelector("#mode");
+
+  modeInput.addEventListener("input", modeInputHandler);
+  function modeInputHandler(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    modeInput.removeEventListener("input", modeInputHandler);
+    if (e.target.value === "roundTale") {
+      renderRountableMenu();
+      renderRoundTables();
+    }
+    if (e.target.value === "noTable") {
+      renderNoTableMenu();
+      renderNoTables();
+    }
+  }
+
+  // Tale Variables:
+  let mode = modeInput.options.selectedIndex;
+
   // formInput.remove();
   formSharedInput.appendChild(userInputNoTable);
   formInputNoTable.appendChild(submitNode);
@@ -574,7 +598,10 @@ function renderNoTableMenu() {
 
   formInputNoTable.addEventListener("submit", formInputNoTableHandler);
   function formInputNoTableHandler(e) {
+    e.stopPropagation();
     e.preventDefault();
+    submitNode.removeEventListener("submit", formInputNoTableHandler);
+    console.log("NoTable submit:", e);
     hw = parseInt(e.target.hallWidth.value);
     hl = parseInt(e.target.hallLength.value);
 
@@ -590,30 +617,7 @@ function renderNoTableMenu() {
     vPos = parseInt(e.target.verticalPos.value);
 
     renderNoTables();
-    renderNoTableMenu();
-  }
-
-  // File Saver:
-  saveFile.addEventListener("click", saveFileInputHandler);
-  function saveFileInputHandler(e) {
-    e.preventDefault();
-    const svgWindow = document.getElementsByClassName("svgWindow")[0].innerHTML;
-    const svgContent =
-      `<svg
-    class="svgWindow"
-    width="100%"
-    height="100%"
-    viewBox="0 0 4000 2000"
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:svg="http://www.w3.org/2000/svg"
-  >` +
-      svgWindow +
-      `</svg>`;
-    const blob = new Blob([svgContent], {
-      type: "text/plain;charset=utf-8",
-    });
-    saveAs(blob, "notfinal.svg");
+    // renderNoTableMenu();
   }
 }
 
@@ -643,6 +647,14 @@ function zoomWheelHandler(e) {
 }
 
 function clearMenu() {
+  // const formShared = document.querySelector(".formShared");
+  // formShared.innerHTML = "";
+
+  // const formInput = document.querySelector("#formInput");
+  // formInput.innerHTML = "";
+  // const formInputNoTable = document.querySelector("#formInputNoTable");
+  // formInputNoTable.innerHTML = "";
+
   const formInput = document.querySelector("#userInput");
   formInput.textContent = "";
 }
@@ -734,26 +746,31 @@ function renderNoTables() {
   }
 }
 
-// Mode Input:
-const modeInput = document.querySelector("#mode");
-
-modeInput.addEventListener("input", modeInputHandler);
-function modeInputHandler(e) {
-  e.preventDefault();
-  if (e.target.value === "roundTale") {
-    renderRountableMenu();
-    renderRoundTables();
-  }
-  if (e.target.value === "noTable") {
-    renderNoTableMenu();
-    renderNoTables();
-  }
-}
-
-// Tale Variables:
-let mode = modeInput.options.selectedIndex;
-
 // Main program:
-
+// File Saver:
+saveFile.addEventListener("click", saveFileInputHandler);
+function saveFileInputHandler(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  // saveFile.removeEventListener("click", saveFileInputHandler);
+  console.log("save", e);
+  const svgWindow = document.getElementsByClassName("svgWindow")[0].innerHTML;
+  const svgContent =
+    `<svg
+       class="svgWindow"
+       width="100%"
+       height="100%"
+       viewBox="0 0 4000 2000"
+       version="1.1"
+       xmlns="http://www.w3.org/2000/svg"
+       xmlns:svg="http://www.w3.org/2000/svg"
+     >` +
+    svgWindow +
+    `</svg>`;
+  const blob = new Blob([svgContent], {
+    type: "text/plain;charset=utf-8",
+  });
+  saveAs(blob, "save.svg");
+}
 renderRountableMenu();
 renderRoundTables();
