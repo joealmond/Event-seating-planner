@@ -528,7 +528,6 @@ function renderNoTables() {
   }
 }
 
-// Main program:
 // File Saver:
 saveFile.addEventListener("click", saveFileInputHandler);
 function saveFileInputHandler(e) {
@@ -554,5 +553,7 @@ function saveFileInputHandler(e) {
   saveFile.href = blobURL;
   saveFile.download = "default_name.svg";
 }
+
+// Main program:
 renderRountableMenu();
 renderRoundTables();
