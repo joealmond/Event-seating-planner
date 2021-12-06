@@ -547,7 +547,7 @@ function saveFileInputHandler(e) {
     svgWindow +
     `</svg>`;
   const blob = new Blob([svgContent], {
-    type: "text/plain;charset=utf-8",
+    type: "image/svg+xml",
   });
 
   const blobURL = URL.createObjectURL(blob);
